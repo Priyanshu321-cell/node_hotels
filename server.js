@@ -4,9 +4,21 @@ const app = express()
 const db = require('./db')
 const menuItem = require('./models/Menu')
 require('dotenv').config()
-const PORT = process.env.PORT || 3000 ;
+const passport = require('./auth')
+PORT = process.env.PORT || 3000 ;
+
+// Middleware 
+const logRequest = (req, res , next)=>{
+  console.log(`[${new Date().toLocaleString()}] Request made to : ${req.originalUrl}`);
+  next();
+}
 
 app.use(bodyParser.json())
+app.use(logRequest)
+
+app.use(passport.initialize())
+const localAuthMiddleware = passport.authenticate('local', {session:false})
+
 app.get('/', (req, res) => {
   res.send('Welcome to my hotel ;')
 })
@@ -16,6 +28,6 @@ const personRoutes = require('./routes/personRoutes')
 app.use('/person', personRoutes)
 
 const menuRoutes = require('./routes/menuRoutes')
-app.use('/menu', menuRoutes)
+app.use('/menu',localAuthMiddleware, menuRoutes)
 
 app.listen(PORT, ()=>{console.log("listening on port 3000")})

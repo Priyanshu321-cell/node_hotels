@@ -13,6 +13,9 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "mongoose": "^8.19.3",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "password": "^0.1.1",
     "prompt-sync": "^4.2.0"
   }
 }

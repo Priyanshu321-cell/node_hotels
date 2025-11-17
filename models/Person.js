@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const password = require('password');
 
 const personSchema = new mongoose.Schema({
     name:{
@@ -28,6 +29,14 @@ const personSchema = new mongoose.Schema({
     salary:{
         type:Number,
         required:true
+    },
+    username:{
+        required:true,
+        type: String
+    },
+    password:{
+        required: true,
+        type: String
     }
 })
 
