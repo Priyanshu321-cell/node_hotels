@@ -25,9 +25,9 @@ app.get('/', (req, res) => {
 
 //import router File
 const personRoutes = require('./routes/personRoutes')
-app.use('/person', personRoutes)
+app.use('/person',localAuthMiddleware, personRoutes)
 
 const menuRoutes = require('./routes/menuRoutes')
-app.use('/menu',localAuthMiddleware, menuRoutes)
+app.use('/menu', menuRoutes)
 
 app.listen(PORT, ()=>{console.log("listening on port 3000")})
